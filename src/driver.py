@@ -23,10 +23,8 @@ def sneak_into_aws():
     except:
         driver.quit()
 
+    sleep(5)
     user_input_box.send_keys(os.getenv('AWS_USER'))
-
-
-    sleep(2)
     password_input_box = driver.find_element_by_id('password')
     password_input_box.send_keys(os.getenv('AWS_PASSWORD'))
     password_input_box.send_keys(Keys.RETURN)
@@ -37,6 +35,10 @@ def sneak_into_aws():
 
     driver.get('https://us-west-2.console.aws.amazon.com/xray/home?region=us-west-2#/service-map?timeRange=PT1H')
     driver.maximize_window()
+    while True:
+        sleep(15)
+        driver.refresh()
+
 
 def pull_up_dashboard():
     pass
