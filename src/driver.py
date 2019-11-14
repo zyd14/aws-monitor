@@ -22,9 +22,10 @@ def sneak_into_aws():
         user_input_box = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'username')))
     except:
         driver.quit()
+    user_input_box.send_keys(os.getenv('AWS_USER'))
 
     sleep(5)
-    user_input_box.send_keys(os.getenv('AWS_USER'))
+
     password_input_box = driver.find_element_by_id('password')
     password_input_box.send_keys(os.getenv('AWS_PASSWORD'))
     password_input_box.send_keys(Keys.RETURN)
@@ -37,7 +38,8 @@ def sneak_into_aws():
     driver.maximize_window()
     while True:
         sleep(15)
-        driver.refresh()
+        refresh_button = driver.find_elements_by_css_selector(".awsui-button-group-content > span:nth-child(1) > span:nth-child(1) > awsui-button:nth-child(1) > button:nth-child(1)")
+        refresh_button[0].send_keys(Keys.RETURN)
 
 
 def pull_up_dashboard():
